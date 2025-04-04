@@ -30,7 +30,11 @@ import { Image } from "astro:assets";
           {
             tags &&
               tags.map((tag) => (
-                <a href={`${tag.link}`} class="badge badge-outline">
+                <a
+                  href={`${tag.link}`}
+                  target="_blank"
+                  class="badge badge-outline"
+                >
                   {tag.name}
                 </a>
               ))
