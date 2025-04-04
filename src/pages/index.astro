@@ -1,78 +1,160 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import HorizontalCard from "../components/HorizontalCard.astro";
-import { getCollection } from "astro:content";
-import createSlug from "../lib/createSlug"
-
-const posts = (await getCollection("blog")).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
-
-const last_posts = posts.slice(0, 3);
+import TimeLineElement from "../components/TimeLine.astro";
 ---
 
-<BaseLayout sideBarActiveItemID="home">
-  <div class="pb-12 mt-5">
+<BaseLayout>
+  <div class="pb-5 mt-5">
     <div class="text-xl py-1">Hey there 👋</div>
-    <div class="text-5xl font-bold">I'm Manuel Ernesto</div>
-    <div class="text-3xl py-3 font-bold">Software Engineer and Entrepreneur</div>
-    <div class="py-2">
+    <div class="text-5xl font-bold">I'm Zhi Wen Soi</div>
+    <!-- <div class="text-3xl py-3 font-bold">Software Engineer</div> -->
+    <div class="py-5">
       <text class="text-lg">
-        This is <b>Astrofy</b> a free and open-source template for your Personal Portfolio Website built with Astro and TailwindCSS.
-        Create in minutes a website with Blog, CV, Project Section, Store and RSS Feed. I hope you find
-        it useful!
+        I obtained my Master's degree in Computer Science from the University of
+        Bern, where I was advised by <a
+          href="https://lydiaychen.com"
+          target="_blank"><i>Prof. Lydia Y. Chen</i></a
+        >, and a Bachelor's degree in Software Engineering from New Era
+        University College. My current research focuses on advancing
+        <b>watermarking techniques for generative models</b> and designing <b
+          >federated machine learning systems</b
+        >, with an emphasis on security, privacy, and distributed intelligence.
       </text>
     </div>
-    <div class="mt-8">
-      <a class="btn" href="https://twitter.com/manuelernestog" target="_blank"> Let's connect!</a>
-      <a href="https://github.com/manuelernestog/astrofy" target="_blank" class="btn btn-outline ml-5">
-        Get This template
-      </a>
-    </div>
   </div>
 
-  <div>
-    <div class="text-3xl w-full font-bold mb-2">My last projects {"</>"}</div>
+  <div id="publications">
+    <div class="text-3xl w-full font-bold mb-5">📝 Publications</div>
   </div>
 
   <HorizontalCard
-    title="Demo Project 1"
-    img="/post_img.webp"
-    desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    url="#"
-    badge="NEW"
+    title="TimeWak: Temporal Chained Watermark for Time Series Diffusion Models"
+    img="/timewak.webp"
+    desc="Embed watermark using a temporal-chained hash directly within the real space."
+    badge="UNDER REVIEW"
+    tags={[{ name: "Code", link: "https://anonymous.4open.science/r/TimeWak" }]}
   />
   <div class="divider my-0"></div>
   <HorizontalCard
-    title="Demo Project 2"
-    img="/post_img.webp"
-    desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    url="#"
+    title="Federated Time Series Generation on Feature and Temporally Misaligned Data"
+    img="/fedtdd.webp"
+    desc="Leverage shared knowledge from clients through the exchange of synthetic data."
+    badge="IN SUBMISSION"
+    tags={[
+      { name: "Paper", link: "https://arxiv.org/abs/2410.21072" },
+      { name: "Code", link: "https://anonymous.4open.science/r/FedTDD" },
+    ]}
   />
   <div class="divider my-0"></div>
   <HorizontalCard
-    title="Demo Project 3"
-    img="/post_img.webp"
-    desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    url="#"
-    badge="FOSS"
+    title="CAMBA: Cost-Aware Mutation-Based Test Case Generation for Unmanned Aerial Vehicles"
+    img="/camba.webp"
+    desc="Strategically place obstacles to challenge drone autonomy, leading to unsafe flights or crashes."
+    badge="SBFT@ICSE 2024"
+    tags={[
+      { name: "Paper", link: "https://dl.acm.org/doi/10.1145/3643659.3643935" },
+      {
+        name: "Code",
+        link: "https://github.com/mdeliso97/CAMBA_CPS-UAV_at_the_SBFT_Tool_Competition_2024",
+      },
+    ]}
   />
 
-  <div>
-    <div class="text-3xl w-full font-bold mb-5 mt-10">Latest from blog</div>
+  <div id="experience">
+    <div class="text-3xl w-full font-bold mb-5 mt-10">🏢 Work Experience</div>
   </div>
 
-  {
-    last_posts.map((post) => (
-      <>
-        <HorizontalCard
-          title={post.data.title}
-          img={post.data.heroImage}
-          desc={post.data.description}
-          url={"/blog/" + createSlug(post.data.title, post.slug)}
-          target="_self"
-          badge={post.data.badge}
-        />
-        <div class="divider my-0" />
-      </>
-    ))
-  }
+  <div class="time-line-container mb-10">
+    <TimeLineElement
+      title="Research Intern"
+      subtitle="From Jun 2024 at University of Neuchâtel & TU Delft, Neuchâtel, Switzerland"
+    >
+      Advised by <a href="https://lydiaychen.com" target="_blank"
+        ><i>Prof. Lydia Y. Chen</i></a
+      > in the Distributed Machine Learning Systems lab. Developed the first watermarking
+      algorithm for multivariate time series diffusion models. Designed a federated
+      learning architecture for time series generation.
+    </TimeLineElement>
+    <TimeLineElement
+      title="Research Assistant"
+      subtitle="From Jun 2022 to Jan 2023 at University of Putra Malaysia, Serdang, Malaysia"
+    >
+      Collected and processed 360&deg; videos synchronized with sensor data from
+      a dynamic construction site. Developed high-precision object detection
+      models on the acquired datasets using YOLOv5.
+    </TimeLineElement>
+    <TimeLineElement
+      title="Embedded Software Engineer & Mobile Developer"
+      subtitle="From Mar 2021 to Oct 2022 at TigaKY Sdn Bhd, Petaling Jaya, Malaysia"
+    >
+      Developed and published an IoT controller mobile application on Google
+      Play. Engineered firmware for IoT devices to seamlessly control multiple
+      modules, sensors, and hardware components. Designed and deployed an MQTT
+      publish-subscribe architecture, optimizing for ultra-fast response times
+      and high reliability.
+    </TimeLineElement>
+  </div>
+
+  <div id="education">
+    <div class="text-3xl w-full font-bold mb-5 mt-10">🎓 Education</div>
+  </div>
+
+  <div class="time-line-container grid gap-4 mb-10">
+    <TimeLineElement
+      title="M.S. in Computer Science"
+      subtitle="2023 to 2025 at University of Bern, Bern, Switzerland"
+    />
+    <TimeLineElement
+      title="B.S. in Software Engineering"
+      subtitle="2019 to 2022 at New Era University College, Kajang, Malaysia"
+    />
+  </div>
+
+  <!-- <div>
+    <div class="text-3xl w-full font-bold mb-5 mt-10">Awards and Honors</div>
+  </div>
+
+  <ul class="list-disc mx-6 mb-10 grid gap-2">
+    <li>
+      3<sup>rd</sup> place in the IEEE/ACM International Workshop on SBFT CPS-UAV Tool
+      Competition 2024
+    </li>
+  </ul> -->
+
+  <div id="projects">
+    <div class="text-3xl w-full font-bold mb-5 mt-10">⚒️ Projects</div>
+  </div>
+
+  <HorizontalCard
+    title="Pick and Place Automation System"
+    img="/papas.webp"
+    desc="Automatically identify, pick up, and place objects from one location to another."
+    tags={[
+      { name: "Video", link: "https://youtu.be/PuQhcaJKhb4?t=7" },
+      { name: "Code", link: "https://github.com/soizhiwen/papas-neuc" },
+    ]}
+  />
+
+  <!-- <div id="skills">
+    <div class="text-3xl w-full font-bold mb-5 mt-10">Skills</div>
+  </div>
+
+  <ul class="list-disc md:columns-5 columns-2 mx-6">
+    <li>Skill Name</li>
+    <li>Skill Name</li>
+    <li>Skill Name</li>
+    <li>Skill Name</li>
+    <li>Skill Name</li>
+    <li>Skill Name</li>
+    <li>Skill Name</li>
+    <li>Skill Name</li>
+    <li>Skill Name</li>
+    <li>Skill Name</li>
+    <li>Skill Name</li>
+    <li>Skill Name</li>
+    <li>Skill Name</li>
+    <li>Skill Name</li>
+    <li>Skill Name</li>
+  </ul> -->
 </BaseLayout>
