@@ -16,6 +16,7 @@ interface Props {
     authors: Author[];
     conference?: string;
     notes?: Note[];
+    institutions?: Note[];
     links: Link[];
     description?: string;
     image?: string;
@@ -30,6 +31,7 @@ const {
   authors,
   conference,
   notes,
+  institutions,
   links,
   ogType,
 } = Astro.props.frontmatter;
@@ -63,14 +65,15 @@ const {
     {TRANSITION_API && <ClientRouter />}
   </head>
   <body
-    class="prose prose-lg prose-zinc prose-a:text-blue-500 prose-a:no-underline prose-a:hover:underline prose-a:font-normal max-w-[50rem] mx-auto pt-16 pb-6 px-6 bg-zinc-50"
+    class="prose prose-md prose-zinc prose-a:text-blue-500 prose-a:no-underline prose-a:hover:underline prose-a:font-normal max-w-[50rem] mx-auto pt-16 pb-6 px-6 text-justify"
   >
     <header>
-      <h1 class="text-5xl text-center font-medium">{title}</h1>
-      <div class="flex flex-col gap-6 items-center">
+      <h1 class="text-4xl text-center font-medium">{title}</h1>
+      <div class="flex flex-col items-center mb-10">
         <Authors authors={authors} />
-        {conference && <div>{conference}</div>}
+        {institutions && <Notes notes={institutions} />}
         {notes && <Notes notes={notes} />}
+        {conference && <div class="text-lg my-4">{conference}<sup>✨</sup></div>}
         {links && <Links links={links} />}
       </div>
     </header>
