@@ -37,26 +37,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
-  sitemap_job:
-    runs-on: ubuntu-latest
-    name: Generate a sitemap
-
-    steps:
-    - name: Checkout the repo
-      uses: actions/checkout@v4
-      with:
-        fetch-depth: 0 
-
-    - name: Generate the sitemap
-      id: sitemap
-      uses: cicirello/generate-sitemap@v1
-      with:
-        base-url-path: https://soizhiwen.com/
-        additional-extensions: doc docx ppt pptx xls xlsx
-
-    - name: Output stats
-      run: |
-        echo "sitemap-path = ${{ steps.sitemap.outputs.sitemap-path }}"
-        echo "url-count = ${{ steps.sitemap.outputs.url-count }}"
-        echo "excluded-count = ${{ steps.sitemap.outputs.excluded-count }}"
