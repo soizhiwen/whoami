@@ -64,33 +64,45 @@ const {
     >
     {TRANSITION_API && <ClientRouter />}
   </head>
-  <body
-    class="prose prose-md prose-zinc prose-a:text-blue-500 prose-a:no-underline prose-a:hover:underline prose-a:font-normal max-w-[50rem] mx-auto pt-16 pb-6 px-6 text-justify"
-  >
-    <header>
-      <h1 class="text-4xl text-center font-medium">{title}</h1>
-      <div class="flex flex-col items-center mb-10">
+  <body class="text-justify pt-16 pb-6 px-8">
+    <header class="max-w-4xl mx-auto">
+      <h1 class="text-3xl md:text-4xl lg:text-5xl text-center font-medium">
+        {title}
+      </h1>
+      <div class="flex flex-col items-center py-10 text-xl">
         <Authors authors={authors} />
         {institutions && <Notes notes={institutions} />}
         {notes && <Notes notes={notes} />}
-        {conference && <div class="text-lg my-4">{conference}<sup>✨</sup></div>}
+        {
+          conference && (
+            <div class="mb-6">
+              {conference}
+              <sup>✨</sup>
+            </div>
+          )
+        }
         {links && <Links links={links} />}
       </div>
     </header>
     <main>
       <slot />
     </main>
-    <footer class="w-full flex justify-center">
+    <footer class="max-w-4xl mx-auto flex justify-center mb-5 pt-10">
       <p class="text-center prose-sm">
         This page was built using <a
+          class="link link-secondary link-hover"
           href="https://github.com/RomanHauksson/academic-project-astro-template"
           >Roman Hauksson's template</a
         >, adapted from <a
+          class="link link-secondary link-hover"
           href="https://github.com/eliahuhorwitz/Academic-project-page-template"
           >Eliahu Horwitz</a
-        > and <a href="https://nerfies.github.io/">Keunhong Park</a>. Licensed
-        under <a href="http://creativecommons.org/licenses/by-sa/4.0/"
-          >CC BY-SA 4.0</a
+        > and <a
+          class="link link-secondary link-hover"
+          href="https://nerfies.github.io/">Keunhong Park</a
+        >. Licensed under <a
+          class="link link-secondary link-hover"
+          href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a
         >.
       </p>
     </footer>

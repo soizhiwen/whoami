@@ -9,12 +9,12 @@ interface Props {
 const { links } = Astro.props;
 ---
 
-<div class="not-prose flex flex-row flex-wrap justify-center gap-2">
+<div class="flex flex-row flex-wrap justify-center gap-4">
   {
     links.map((link) => (
       <a
         href={link.url}
-        class="flex flex-row bg-zinc-800 text-white rounded-full gap-2 items-center text-lg px-5 py-2 hover:bg-black hover:no-underline"
+        class="btn btn-lg btn-neutral rounded-full"
       >
         {link.icon && <Icon name={link.icon} />}
         <span>{link.name}</span>
