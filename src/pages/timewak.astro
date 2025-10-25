@@ -4,6 +4,7 @@ import { Code } from "astro-expressive-code/components";
 import AcademicLayout from "../layouts/AcademicLayout.astro";
 import Figure from "../components/academic/Figure.astro";
 import Image from "../components/academic/Image.astro";
+import Video from "../components/academic/Video.astro";
 import ThreeColumns from "../components/academic/ThreeColumns.astro";
 
 const metadata = {
@@ -76,6 +77,7 @@ const metadata = {
   // image: "thumbnail.webp",
 };
 
+import methodVideo from "../assets/timewak/method.mp4";
 import method from "../assets/timewak/method.webp";
 import scatter24 from "../assets/timewak/scatter_24.webp";
 import scatter64 from "../assets/timewak/scatter_64.webp";
@@ -87,32 +89,7 @@ import attack64 from "../assets/timewak/attack_64.webp";
 <AcademicLayout frontmatter={metadata}>
   <section class="py-8">
     <div class="max-w-7xl mx-auto">
-      <Figure>
-        <Image slot="figure" source={method} altText="Overview of TimeWak." />
-      </Figure>
-      <p class="mt-2">
-        First, we assign random seeds at the beginning of each interval. <span
-          class="btn btn-outline btn-circle btn-xs">1</span
-        >
-        Temporally chained-hashing. A, B, and C (<span
-          style="background-color: #FF93CD">pink</span
-        >) show seeds being copied from the previous step and the feature order
-        shuffled. <span class="btn btn-outline btn-circle btn-xs">2</span> Shuffling
-        the seeds for each series. Positional indices are highlighted in <span
-          style="background-color: #47FF9D">green</span
-        >. <span class="btn btn-outline btn-circle btn-xs">3</span> Constructing
-        an initial Gaussian noise. <span
-          class="btn btn-outline btn-circle btn-xs">4</span
-        > Generating multivariate time series. <span
-          class="btn btn-outline btn-circle btn-xs">5</span
-        > Reversing the diffusion process. <span
-          class="btn btn-outline btn-circle btn-xs">6</span
-        > Recovering the watermark seed. <span
-          class="btn btn-outline btn-circle btn-xs">7</span
-        > Unshuffling the seeds in the opposite way they were shuffled. <span
-          class="btn btn-outline btn-circle btn-xs">8</span
-        > Bit accuracy between the hash and recovered seed.
-      </p>
+      <Video src={methodVideo} />
     </div>
   </section>
 
@@ -143,6 +120,38 @@ import attack64 from "../assets/timewak/attack_64.webp";
         improvements of 61.96% in context-FID score, and 8.44% in correlational
         scores against the strongest state-of-the-art baseline, while remaining
         consistently detectable.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-8">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="text-3xl text-center font-medium pb-4">Overview</h2>
+      <Figure>
+        <Image slot="figure" source={method} altText="Overview of TimeWak." />
+      </Figure>
+      <p class="mt-2">
+        First, we assign random seeds at the beginning of each interval. <span
+          class="btn btn-outline btn-circle btn-xs">1</span
+        >
+        Temporally chained-hashing. A, B, and C (<span
+          style="background-color: #FF93CD">pink</span
+        >) show seeds being copied from the previous step and the feature order
+        shuffled. <span class="btn btn-outline btn-circle btn-xs">2</span> Shuffling
+        the seeds for each series. Positional indices are highlighted in <span
+          style="background-color: #47FF9D">green</span
+        >. <span class="btn btn-outline btn-circle btn-xs">3</span> Constructing
+        an initial Gaussian noise. <span
+          class="btn btn-outline btn-circle btn-xs">4</span
+        > Generating multivariate time series. <span
+          class="btn btn-outline btn-circle btn-xs">5</span
+        > Reversing the diffusion process. <span
+          class="btn btn-outline btn-circle btn-xs">6</span
+        > Recovering the watermark seed. <span
+          class="btn btn-outline btn-circle btn-xs">7</span
+        > Unshuffling the seeds in the opposite way they were shuffled. <span
+          class="btn btn-outline btn-circle btn-xs">8</span
+        > Bit accuracy between the hash and recovered seed.
       </p>
     </div>
   </section>
