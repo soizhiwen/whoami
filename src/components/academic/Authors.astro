@@ -14,7 +14,11 @@ const { authors } = Astro.props;
       <div class="flex flex-col items-center text-center">
         <div class="flex flex-row">
           {author.url ? (
-            <a class="link link-secondary link-hover" href={author.url}>
+            <a
+              class="link link-secondary link-hover"
+              href={author.url}
+              {...(author.url !== "/" ? { target: "_blank" } : {})}
+            >
               {author.name}
             </a>
           ) : (
