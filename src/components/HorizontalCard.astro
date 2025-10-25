@@ -27,8 +27,10 @@ import { Image } from "astro:assets";
         <p class="py-1 text-1xl" set:html={desc} />
         {
           badge && (
-            <div class="badge badge-outline badge-secondary font-medium">
-              {badge}
+            <div class="mb-2">
+              <div class="badge badge-outline badge-secondary font-medium">
+                {badge}
+              </div>
             </div>
           )
         }
