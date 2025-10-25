@@ -4,6 +4,7 @@ import { Code } from "astro-expressive-code/components";
 import AcademicLayout from "../layouts/AcademicLayout.astro";
 import Figure from "../components/academic/Figure.astro";
 import Image from "../components/academic/Image.astro";
+import ThreeColumns from "../components/academic/ThreeColumns.astro";
 
 const metadata = {
   title: "TimeWak: Temporal Chained-Hashing Watermark for Time Series Data",
@@ -76,6 +77,11 @@ const metadata = {
 };
 
 import method from "../assets/timewak/method.webp";
+import scatter24 from "../assets/timewak/scatter_24.webp";
+import scatter64 from "../assets/timewak/scatter_64.webp";
+import scatter128 from "../assets/timewak/scatter_128.webp";
+import tprs from "../assets/timewak/tprs.webp";
+import attack64 from "../assets/timewak/attack_64.webp";
 ---
 
 <AcademicLayout frontmatter={metadata}>
@@ -84,7 +90,7 @@ import method from "../assets/timewak/method.webp";
       <Figure>
         <Image slot="figure" source={method} altText="Overview of TimeWak." />
       </Figure>
-      <p>
+      <p class="mt-2">
         First, we assign random seeds at the beginning of each interval. <span
           class="btn btn-outline btn-circle btn-xs">1</span
         >
@@ -142,8 +148,84 @@ import method from "../assets/timewak/method.webp";
   </section>
 
   <section class="py-8">
-    <div class="max-w-4xl mx-auto">
-      <h2 class="text-3xl text-center font-medium pb-4">Developing...</h2>
+    <div class="max-w-7xl mx-auto">
+      <h2 class="text-3xl text-center font-medium pb-4">
+        Synthetic Data Quality and Watermark Detectability
+      </h2>
+      <ThreeColumns>
+        <Figure slot="left">
+          <Image
+            slot="figure"
+            source={scatter24}
+            altText="Scatter 24-length."
+          />
+          <Fragment slot="caption">24-length</Fragment>
+        </Figure>
+        <Figure slot="center">
+          <Image
+            slot="figure"
+            source={scatter64}
+            altText="Scatter 64-length."
+          />
+          <Fragment slot="caption">64-length</Fragment>
+        </Figure>
+        <Figure slot="right">
+          <Image
+            slot="figure"
+            source={scatter128}
+            altText="Scatter 128-length."
+          />
+          <Fragment slot="caption">128-length</Fragment>
+        </Figure>
+      </ThreeColumns>
+      <p class="mt-2">
+        TimeWak consistently delivers top-tier performance across all metrics,
+        outperforming or comparable to other baselines like HTW and TabWak<sup
+          >⊤</sup
+        >. Although HTW achieves higher-quality results, it fails to offer
+        strong detectability, as reflected in its low Z-scores. In contrast,
+        TimeWak and TabWak<sup>⊤</sup> offer a far more favorable trade-off between
+        quality and detectability.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-8">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="text-3xl text-center font-medium pb-4">TPR@0.1%FPR</h2>
+      <Figure>
+        <Image slot="figure" source={tprs} altText="TPR@0.1%FPR." />
+      </Figure>
+      <p class="mt-2">
+        We present the TPR@0.1%FPR metric against the number of samples across
+        five datasets under 24, 64 and 128 window sizes. In most cases, TimeWak
+        consistently outperforms other baselines, such as Gaussian Shading and
+        TabWak<sup>⊤</sup>, by achieving significantly higher TPR values.
+        Notably, TimeWak reaches a perfect 1.0 TPR@0.1%FPR in the majority of
+        scenarios, with 7 cases requiring only a single sample and 4 cases
+        needing just 2 samples, demonstrating its strong detectability with
+        minimal data requirements.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-8">
+    <div class="max-w-7xl mx-auto">
+      <h2 class="text-3xl text-center font-medium pb-4">
+        Robustness Against Post-Editing Attacks
+      </h2>
+      <Figure>
+        <Image slot="figure" source={attack64} altText="Attack 64-length." />
+      </Figure>
+      <p class="mt-2">
+        We present the Z-scores of 64-length watermarked synthetic time series
+        data under three attacks, and averaged over 100 trials. Random cropping
+        at 30% proves especially challenging, with several methods showing
+        negative Z-scores. Nevertheless, TimeWak demonstrates the best overall
+        robustness, consistently outperforming all baselines across most attack
+        scenarios while maintaining high generation quality and accurate
+        watermark detection.
+      </p>
     </div>
   </section>
 
